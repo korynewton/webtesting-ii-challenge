@@ -38,12 +38,21 @@ class App extends Component {
 
   strike = (event) => {
     event.preventDefault();
-    this.setState({
-      count: {
-        ...this.state.count,
-        strikes: this.state.count.strikes + 1
-      }
-    })
+    if (this.state.count.strikes < 2) {
+      this.setState({
+        count: {
+          ...this.state.count,
+          strikes: this.state.count.strikes + 1
+        }
+      })
+    } else {
+      this.setState({ 
+        count : {
+          balls: 0,
+          strikes: 0
+        }
+       })
+    }
   }
 
   foul = (event) => {
@@ -56,6 +65,17 @@ class App extends Component {
         }
       })
     }
+  }
+
+  hit = (event) => {
+    event.preventDefault();
+      this.setState({
+        count: {
+          balls: 0,
+          strikes: 0
+        }
+      })
+    
   }
 
 
