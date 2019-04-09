@@ -19,11 +19,34 @@ class App extends Component {
           <Display count={this.state.count} />
         </div>
         <div className="dashboard">
-          <Dashboard />
+          <Dashboard ball={this.ball} strike={this.strike} />
         </div>
       </>
     );
   }
+
+  ball = (event) => {
+    event.preventDefault();
+    this.setState({
+      count: {
+        ...this.state.count,
+        balls: this.state.count.balls + 1
+      }
+    })
+  }
+
+
+  strike = (event) => {
+    event.preventDefault();
+    this.setState({
+      count: {
+        ...this.state.count,
+        strikes: this.state.count.strikes + 1
+      }
+    })
+  }
+
+
 }
 
 export default App;

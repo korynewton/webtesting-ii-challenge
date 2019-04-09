@@ -6,8 +6,8 @@ export default class dashboard extends Component {
       <>
         <h1>Dash:</h1>
         <div className="buttons">
-          <button>Ball</button>
-          <button>Strike</button>
+          <button onClick={event => this.props.ball(event)}>Ball</button>
+          <button onClick={this.props.strike}>Strike</button>
           <button>Foul</button>
           <button>Hit</button>
         </div>
