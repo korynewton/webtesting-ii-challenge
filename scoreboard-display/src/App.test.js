@@ -87,5 +87,30 @@ describe('<Dashboard />', () => {
     expect(getByTestId('ball-count').textContent).toBe('Balls: 0')
     expect(getByTestId('strike-count').textContent).toBe('Strikes: 0')
   });
+
+  it('foul will increase strikes until 2 but will not incrememnt further', () => {
+    const appTree = (
+      <App >
+        <Display />
+        <Dashboard />
+      </App>
+      )
+
+    const { getByTestId } = render(appTree)
+
+    const foulBtn = getByTestId('foul-btn')
+
+    expect(getByTestId('strike-count').textContent).toBe('Strikes: 0')
+    expect(getByTestId('ball-count').textContent).toBe('Balls: 0')
+    fireEvent.click(foulBtn);
+    expect(getByTestId('ball-count').textContent).toBe('Balls: 0')
+    expect(getByTestId('strike-count').textContent).toBe('Strikes: 1')
+    fireEvent.click(foulBtn);
+    expect(getByTestId('ball-count').textContent).toBe('Balls: 0')
+    expect(getByTestId('strike-count').textContent).toBe('Strikes: 2')
+    fireEvent.click(foulBtn);
+    expect(getByTestId('ball-count').textContent).toBe('Balls: 0')
+    expect(getByTestId('strike-count').textContent).toBe('Strikes: 2')
+  });
   
 });
