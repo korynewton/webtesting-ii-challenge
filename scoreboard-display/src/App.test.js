@@ -50,10 +50,41 @@ describe('<Dashboard />', () => {
     expect(getByTestId('strike-count').textContent).toBe('Strikes: 0')
     expect(getByTestId('ball-count').textContent).toBe('Balls: 0')
     fireEvent.click(strikeBtn);
+    expect(getByTestId('ball-count').textContent).toBe('Balls: 0')
     expect(getByTestId('strike-count').textContent).toBe('Strikes: 1')
     fireEvent.click(strikeBtn);
+    expect(getByTestId('ball-count').textContent).toBe('Balls: 0')
     expect(getByTestId('strike-count').textContent).toBe('Strikes: 2')
     fireEvent.click(strikeBtn);
+    expect(getByTestId('ball-count').textContent).toBe('Balls: 0')
+    expect(getByTestId('strike-count').textContent).toBe('Strikes: 0')
+  });
+
+  it('increment balls until 3, then reset', () => {
+    const appTree = (
+      <App >
+        <Display />
+        <Dashboard />
+      </App>
+      )
+
+    const { getByTestId } = render(appTree)
+
+    const ballBtn = getByTestId('ball-btn')
+
+    expect(getByTestId('strike-count').textContent).toBe('Strikes: 0')
+    expect(getByTestId('ball-count').textContent).toBe('Balls: 0')
+    fireEvent.click(ballBtn);
+    expect(getByTestId('ball-count').textContent).toBe('Balls: 1')
+    expect(getByTestId('strike-count').textContent).toBe('Strikes: 0')
+    fireEvent.click(ballBtn);
+    expect(getByTestId('ball-count').textContent).toBe('Balls: 2')
+    expect(getByTestId('strike-count').textContent).toBe('Strikes: 0')
+    fireEvent.click(ballBtn);
+    expect(getByTestId('ball-count').textContent).toBe('Balls: 3')
+    expect(getByTestId('strike-count').textContent).toBe('Strikes: 0')
+    fireEvent.click(ballBtn);
+    expect(getByTestId('ball-count').textContent).toBe('Balls: 0')
     expect(getByTestId('strike-count').textContent).toBe('Strikes: 0')
   });
   
