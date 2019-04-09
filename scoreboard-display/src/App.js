@@ -27,12 +27,21 @@ class App extends Component {
 
   ball = (event) => {
     event.preventDefault();
-    this.setState({
-      count: {
-        ...this.state.count,
-        balls: this.state.count.balls + 1
-      }
-    })
+    if (this.state.count.balls < 3) {
+      this.setState({
+        count: {
+          ...this.state.count,
+          balls: this.state.count.balls + 1
+        }
+      })
+    } else {
+      this.setState({ 
+        count : {
+          balls: 0,
+          strikes: 0
+        }
+       })
+    }
   }
 
 
