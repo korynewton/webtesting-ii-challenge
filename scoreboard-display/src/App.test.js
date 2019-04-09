@@ -112,5 +112,32 @@ describe('<Dashboard />', () => {
     expect(getByTestId('ball-count').textContent).toBe('Balls: 0')
     expect(getByTestId('strike-count').textContent).toBe('Strikes: 2')
   });
+
+  it('will reset count after a hit', () => {
+    const appTree = (
+      <App >
+        <Display />
+        <Dashboard />
+      </App>
+      )
+
+    const { getByTestId } = render(appTree)
+
+    const hitBtn = getByTestId('hit-btn')
+    const strikeBtn = getByTestId('strike-btn')
+
+
+    expect(getByTestId('strike-count').textContent).toBe('Strikes: 0')
+    expect(getByTestId('ball-count').textContent).toBe('Balls: 0')
+    fireEvent.click(strikeBtn);
+    expect(getByTestId('ball-count').textContent).toBe('Balls: 0')
+    expect(getByTestId('strike-count').textContent).toBe('Strikes: 1')
+    fireEvent.click(strikeBtn);
+    expect(getByTestId('ball-count').textContent).toBe('Balls: 0')
+    expect(getByTestId('strike-count').textContent).toBe('Strikes: 2')
+    fireEvent.click(hitBtn);
+    expect(getByTestId('ball-count').textContent).toBe('Balls: 0')
+    expect(getByTestId('strike-count').textContent).toBe('Strikes: 0')
+  });
   
 });
