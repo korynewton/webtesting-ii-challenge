@@ -19,7 +19,7 @@ class App extends Component {
           <Display count={this.state.count} />
         </div>
         <div className="dashboard">
-          <Dashboard ball={this.ball} strike={this.strike} />
+          <Dashboard ball={this.ball} strike={this.strike} foul={this.foul} hit={this.hit} />
         </div>
       </>
     );
@@ -44,6 +44,18 @@ class App extends Component {
         strikes: this.state.count.strikes + 1
       }
     })
+  }
+
+  foul = (event) => {
+    event.preventDefault();
+    if (this.state.count.strikes < 2) {
+      this.setState({
+        count: {
+          ...this.state.count,
+          strikes: this.state.count.strikes + 1
+        }
+      })
+    }
   }
 
 
