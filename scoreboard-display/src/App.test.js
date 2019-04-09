@@ -1,39 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { render, fireEvent } from 'react-testing-library'
-// import 'jest-dom/extend-expect'; 
-// import Dashboard from '../components/dashboard';
-// import Display from '../components/display';
+import { render } from 'react-testing-library'
+import 'jest-dom/extend-expect'; 
+
+import Display from './components/display';
 
 import App from './App';
 
-describe('App component', () => {
-  it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<App />, div);
-    ReactDOM.unmountComponentAtNode(div);
+
+
+
+describe('<Display /> ', () => {
+
+  it('should display the correct string based on props passed', () => {
+    const situation1 = { balls: 0, strikes: 0 }
+    const situation2 = { balls: 3, strikes: 2 }
+    const situation3 = { balls: 1, strikes: 1 }
+
+    const { getByTestId, rerender } = render(<Display count={situation1} />)
+    expect(getByTestId('strike-count').textContent).toBe('Strikes: 0')
+    expect(getByTestId('ball-count').textContent).toBe('Balls: 0')
+
+    rerender(<Display count={situation2} />) //renders Display again with new props
+    expect(getByTestId('strike-count').textContent).toBe('Strikes: 2')
+    expect(getByTestId('ball-count').textContent).toBe('Balls: 3')
+
+    rerender(<Display count={situation3} />)
+    expect(getByTestId('strike-count').textContent).toBe('Strikes: 1')
+    expect(getByTestId('ball-count').textContent).toBe('Balls: 1')
+
   });
   
-});
-
-
-// describe('<Dashboard />', () => {
-//     it('correctly increments when buttons are fired', () => {
-//       const testCount = {
-//         balls: 1,
-//         strikes: 1
-//       }
-    
-//       const { getByText } = render(<App state={testCount} />)
-
-//     //   const ballBtn = getByText(/ball/i);
-//     //   const strikeBtn = getByText(/strike/i);
-//     //   const foulBtn = getByText(/foul/i);
-//     //   const hitBtn = getByText(/hit/i);
-      
   
-//     //   fireEvent.click(button);
-//     //   // getByText(/Balls:/)
-      
-//     });  
-  // });
+});
